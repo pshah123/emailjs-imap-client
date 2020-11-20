@@ -382,7 +382,8 @@ export default class Imap {
 
     // always call onerror callback, no matter if close() succeeds or fails
     this.onerror && this.onerror(error)
-    this.close(error)
+    this.logger.error("Closing socket now...")
+    this.close(error).then(() => this.logger.error("Closed remaining socket."))
   }
 
   /**
